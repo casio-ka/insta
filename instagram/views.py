@@ -11,7 +11,7 @@ from .models import *
 
 
 
-@login_required(login_url='/accounts/register/')
+@login_required(login_url='/accounts/login/')
 def Home(request):
     images = Image.get_all_images()
     profiles = Profile.objects.all()
