@@ -1,8 +1,6 @@
 from django.db import models
-import datetime as dt
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+from .utils import get_random_code
 from cloudinary.models import CloudinaryField
 from django.template.defaultfilters import slugify
 
@@ -66,7 +64,7 @@ class Image(models.Model):
     name = models.CharField(max_length = 50)
     image = CloudinaryField('image', blank = True)
     caption = models.TextField(max_length=400)
-    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    profile = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
 
