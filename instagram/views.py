@@ -14,16 +14,13 @@ from .models import *
 @login_required(login_url='/accounts/register/')
 def Home(request):
     images = Image.get_all_images()
-    likes = Likes.objects.all()
     profiles = Profile.objects.all()
     comments = Comments.objects.all()
     profile_pic = User.objects.all()
     form = CommentForm()
     id = request.user.id
-    liked_images = Likes.objects.filter(user_id=id)
-    mylist = [i.image_id for i in liked_images]
     title = 'Home'
-    return render(request, 'index.html', {'title':title, 'images':images, 'profile_pic':profile_pic, 'form':form, 'comments':comments, 'profiles':profiles, 'likes':likes, 'list':mylist})
+    return render(request, 'index.html', {'title':title, 'images':images, 'profile_pic':profile_pic, 'form':form, 'comments':comments, 'profiles':profiles})
 
 
 @login_required(login_url='/accounts/login/')
@@ -52,8 +49,6 @@ def profile(request, username):
     users = User.objects.get(username=username)
     
     id = request.user.id
-    liked_images = Likes.objects.filter(user_id=id)
-    mylist = [i.image_id for i in liked_images]
     form = CommentForm()
 
     try:
@@ -62,7 +57,7 @@ def profile(request, username):
         profile_details = Profile.filter_by_id(profile.id)
 
     images = Image.get_profile_pic(profile.id)
-    return render(request, 'profile/profile.html', {'title':title, 'comments':comments, 'profile':profile, 'profile_details':profile_details, 'images':images, 'list':mylist, 'form':form})
+    return render(request, 'profile/profile.html', {'title':title, 'comments':comments, 'profile':profile, 'profile_details':profile_details, 'images':images, 'form':form})
 
 
 @login_required(login_url='/accounts/login/')
