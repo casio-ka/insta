@@ -12,7 +12,7 @@ from .models import *
 
 
 @login_required(login_url='/accounts/register/')
-def timeline(request):
+def Home(request):
     images = Image.get_all_images()
     likes = Likes.objects.all()
     profiles = Profile.objects.all()
@@ -42,12 +42,6 @@ def comment(request, image_id):
 
     title = 'Home'
     return render(request, 'index.html', {'title':title})
-
-
-@login_required(login_url='/accounts/login/')
-def home(request):
-    title = 'Home'
-    return render(request, 'home/home.html', {'title':title})
 
 
 @login_required(login_url='/accounts/login/')
@@ -146,3 +140,17 @@ def is_liked(request):
     mylist = [i.image_id for i in liked_images]
     print(mylist)
     return HttpResponse(liked_images)
+
+
+def follow_unfollow(request):
+    if request.method == "POST":
+        profile = User.objects.get(username=request.user)
+        pk = request.POST.get('profile_pk')
+        obj = Profile.objects.get(pk=pk)
+
+        if obj.user in profile.following.all():
+            profile.following.remove(obj.user)
+        else:
+            profile.following.add(obj.user)
+        return redirect(request.META.get('HTTP_REFERER'))
+    return redirect('profiles:all-profiles-view')
