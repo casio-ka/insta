@@ -42,8 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'cloudinary',
-
-     'instagram',
+    
+    'instagram',
 ]
 
 MIDDLEWARE = [
@@ -139,6 +139,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 
 #one-step registration
 REGISTRATION_OPEN = True
