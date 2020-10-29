@@ -1,0 +1,10 @@
+export SECRET_KEY='@zy&(z5k6!iiz+is%d&j--pr$&tnuw^#5tq%t*coqbzkvw(k(&'
+export DEBUG=True
+export ALLOWED_HOSTS='*'
+export DB_NAME='insta'
+export DB_PASSWORD='thecode'
+export DB_USER='wainainakasyoka'
+export DB_PORT=5432
+export CLOUDINARY_CLOUD_NAME='dw9y1xy4x'
+export CLOUDINARY_API_KEY='351488684484568'
+export CLOUDINARY_API_SECRET='dJgnezt7fuEVFXB4w_MeUT6bLJY'
