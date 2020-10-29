@@ -58,6 +58,7 @@ class Image(models.Model):
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(User, related_name='image_like')
 
     def save_image(self):
         self.save()
@@ -93,18 +94,7 @@ class Image(models.Model):
         ordering = ['-created',]
 
 
-class Likes(models.Model):
-    image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='likes')
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='likes')
 
-    def save_like(self):
-        self.save()
-
-    def unlike_like(self):
-        self.delete()
-
-
-    
 class Comments(models.Model):
     comment = models.CharField(max_length = 300)
     posted_on = models.DateTimeField(auto_now=True)
