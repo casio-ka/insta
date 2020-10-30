@@ -57,7 +57,7 @@ class Image(models.Model):
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    likes = models.ManyToManyField(User, related_name='image_like' ,null=True, blank=True)
+    likes = models.ManyToManyField(User, related_name='image_like', blank=True)
 
     def save_image(self):
         self.save()
