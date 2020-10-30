@@ -52,13 +52,12 @@ class Profile(models.Model):
 
 
 class Image(models.Model):
-    name = models.CharField(max_length = 50)
     image = CloudinaryField('image', blank = True)
     caption = models.TextField(max_length=400)
     profile = models.ForeignKey(User, on_delete=models.CASCADE)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    likes = models.ManyToManyField(User, related_name='image_like')
+    likes = models.ManyToManyField(User, related_name='image_like' ,null=True, blank=True)
 
     def save_image(self):
         self.save()
@@ -88,7 +87,7 @@ class Image(models.Model):
         return images
 
     def __str__(self):
-        return self.name
+        return self.caption
 
     class Meta:
         ordering = ['-created',]
