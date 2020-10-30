@@ -97,19 +97,16 @@ def search_results(request):
 
 @login_required(login_url='/accounts/login/')
 def upload_image(request):
-    profile = Profile.objects.all()
-    form = ImageForm()
-    for profile in profile:
-        if profile.user.id == request.user.id:
-            if request.method == 'POST':
-                form = ImageForm(request.POST, request.FILES)
-                if form.is_valid():
-                    upload = form.save(commit=False)
-                    upload.profile = request.user
-                    upload.save()
-                    return redirect('profile', username=request.user)
-                else:
-                    form = ImageForm()
+
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            upload = form.save(commit=False)
+            upload.profile = request.user
+            upload.save()
+            return redirect('index')
+    else:
+        form = ImageForm()
     
     return render(request, 'upload.html', {'form':form})
 
