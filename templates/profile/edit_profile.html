@@ -10,17 +10,19 @@
                 <a class="nav-link side" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Change Password</a>
 
                 {% if profile_details.photo %}
-                <img src="{{profile_details.photo.cdn_url}}" alt="Profile Photo"  width="250" height="250" class="mt-5" style="border-radius: 50%">
+                <img src="{{profile_details.photo.url}}" alt="Profile Photo"  width="250" height="250" class="mt-5" style="border-radius: 50%">
                 {% else %}
                 <img src="https://bit.ly/3gFpUFE" alt="Avatar"  width="250" height="250" class="" style="border-radius: 50%">
                 {% endif %}
                 <div>
-                    <span><strong>{{ profile_details.user.username }}</strong></span><br>
-                    <p>
-                        {% autoescape on %}
-                        {{profile_details.bio| safe}}
-                        {% endautoescape %}
-                    </p>
+                   <form action="{% url 'edit_profile' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-sm btn-primary" value="Submit">
+                        </div>
+                        <input type="hidden" name="next" value="/profile">
+                    </form> 
                 </div>
             </div>
         </div>
