@@ -22,5 +22,5 @@ urlpatterns = [
     path('', include('instagram.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('django_registration.backends.one_step.urls')),
-    path("logout/", LogoutView.as_view(), {"next_page": '/'}),
+    path("logout/", LogoutView.as_view(), {"next_page": '/login'}),
 ]
