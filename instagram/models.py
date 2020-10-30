@@ -111,3 +111,5 @@ class Comments(models.Model):
     def get_comments_by_images(cls, id):
         comments = Comments.objects.filter(image__pk = id)
         return comments
+    class Meta:
+         verbose_name = "Comment"
