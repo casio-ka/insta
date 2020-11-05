@@ -70,14 +70,13 @@ def edit_profile(request):
         profile_details = Profile.filter_by_id(profile.id)
 
     if request.method == 'POST':
-        form = ProfileForm(request.POST, request.FILES)
+        form = ProfileForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
-            edit = form.save(commit=False)
-            edit.user = request.user
-            edit.save()
+            
+            form.save()
             return redirect('profile', username=request.user)
     else:
-        form = ProfileForm()
+        form = ProfileForm(instance=request.user)
 
     return render(request, 'profile/edit_profile.html', {'form':form, 'profile_details':profile_details})
 

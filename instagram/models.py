@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
-from django.template.defaultfilters import slugify
+from django.db.models.signals import post_save
 
 # Create your models here.
 #Creating a model for Profile..
 class Profile(models.Model):
-    first_name =models.TextField(max_length=20, blank=True)
-    last_name =models.TextField(max_length=20, blank=True)
+    name =models.TextField(max_length=20, blank=True)
     bio = models.TextField(default="no bio..." ,max_length=250)
     photo = CloudinaryField('image' ,blank = True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -49,7 +48,6 @@ class Profile(models.Model):
 
     class Meta:
         ordering = ('-created',)
-
 
 class Image(models.Model):
     image = CloudinaryField('image', blank = True)

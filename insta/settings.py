@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 import os
 import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -150,3 +149,5 @@ REGISTRATION_OPEN = True
 
 LOGIN_REDIRECT_URL = ''
 LOGOUT_REDIRECT_URL = '/'
+
+django_heroku.settings(locals())
